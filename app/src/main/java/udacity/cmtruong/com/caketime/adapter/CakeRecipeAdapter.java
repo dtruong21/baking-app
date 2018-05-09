@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -23,11 +22,11 @@ import udacity.cmtruong.com.caketime.vm.CakeItemViewModel;
  * @version 1.0
  * @since May, 8th
  */
-public class CakeReceiptAdapter extends RecyclerView.Adapter<CakeReceiptAdapter.CakeViewHolder> {
-    private static final String TAG = CakeReceiptAdapter.class.getSimpleName();
+public class CakeRecipeAdapter extends RecyclerView.Adapter<CakeRecipeAdapter.CakeViewHolder> {
+    private static final String TAG = CakeRecipeAdapter.class.getSimpleName();
     private List<Cake> cakes;
 
-    public CakeReceiptAdapter() {
+    public CakeRecipeAdapter() {
         cakes = new ArrayList<>();
     }
 
@@ -67,6 +66,7 @@ public class CakeReceiptAdapter extends RecyclerView.Adapter<CakeReceiptAdapter.
             super(itemBinding.cakeCardView);
             this.itemBinding = itemBinding;
         }
+
 
     }
 }

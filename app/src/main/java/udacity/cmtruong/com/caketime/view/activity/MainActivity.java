@@ -1,4 +1,4 @@
-package udacity.cmtruong.com.caketime.view;
+package udacity.cmtruong.com.caketime.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import udacity.cmtruong.com.caketime.R;
+import udacity.cmtruong.com.caketime.view.fragment.CakeListFragment;
 
 /**
  * MainActivity

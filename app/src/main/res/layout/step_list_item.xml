@@ -7,14 +7,13 @@
 
         <variable
             name="viewModel"
-            type="udacity.cmtruong.com.caketime.vm.CakeItemViewModel" />
+            type="udacity.cmtruong.com.caketime.vm.StepItemViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cake_card_view"
+        android:id="@+id/step_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{(v) -> viewModel.onCardClicked(v)}"
         app:cardBackgroundColor="@color/card"
         app:cardCornerRadius="@dimen/card_radius"
         app:cardUseCompatPadding="true">
@@ -27,12 +26,11 @@
             android:padding="@dimen/card_padding">
 
             <TextView
-                android:id="@+id/cake_name_tv"
+                android:id="@+id/step_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
                 android:fontFamily="serif-monospace"
-                android:text="@{viewModel.name}"
                 android:textSize="@dimen/cake_name"
                 android:textStyle="bold"
                 tools:text="Donut" />

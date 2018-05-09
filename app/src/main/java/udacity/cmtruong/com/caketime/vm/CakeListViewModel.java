@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import rx.Subscriber;
-import udacity.cmtruong.com.caketime.adapter.CakeReceiptAdapter;
+import udacity.cmtruong.com.caketime.adapter.CakeRecipeAdapter;
 import udacity.cmtruong.com.caketime.api.CakeRetrofitImpl;
 import udacity.cmtruong.com.caketime.model.Cake;
 
@@ -14,9 +14,9 @@ public class CakeListViewModel {
     public ObservableField<Integer> recyclerViewVisibility;
     public ObservableField<Integer> progressBarVisibility;
     private Subscriber<Cake> mSubscriber;
-    private CakeReceiptAdapter mAdapter;
+    private CakeRecipeAdapter mAdapter;
 
-    public CakeListViewModel(CakeReceiptAdapter mAdapter) {
+    public CakeListViewModel(CakeRecipeAdapter mAdapter) {
         this.mAdapter = mAdapter;
         Log.d(TAG, "CakeListViewModel: [CakeListVM] Started");
         initData();
@@ -66,5 +66,6 @@ public class CakeListViewModel {
         CakeRetrofitImpl.getInstance().getCakes(mSubscriber);
         Log.d(TAG, "getCakes: done");
     }
+
 
 }

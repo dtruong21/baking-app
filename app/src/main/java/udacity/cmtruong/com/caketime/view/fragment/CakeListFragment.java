@@ -1,4 +1,4 @@
-package udacity.cmtruong.com.caketime.view;
+package udacity.cmtruong.com.caketime.view.fragment;
 
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import udacity.cmtruong.com.caketime.R;
-import udacity.cmtruong.com.caketime.adapter.CakeReceiptAdapter;
+import udacity.cmtruong.com.caketime.adapter.CakeRecipeAdapter;
 import udacity.cmtruong.com.caketime.databinding.CakeFragmentBinding;
 import udacity.cmtruong.com.caketime.vm.CakeListViewModel;
 
@@ -25,7 +25,7 @@ import udacity.cmtruong.com.caketime.vm.CakeListViewModel;
  */
 public class CakeListFragment extends Fragment {
     private static final String TAG = CakeListFragment.class.getSimpleName();
-    private CakeReceiptAdapter mAdapter;
+    private CakeRecipeAdapter mAdapter;
     private CakeListViewModel mViewModel;
     private CakeFragmentBinding cakeFragmentBinding;
 
@@ -45,7 +45,7 @@ public class CakeListFragment extends Fragment {
     }
 
     private void initData() {
-        mAdapter = new CakeReceiptAdapter();
+        mAdapter = new CakeRecipeAdapter();
         Log.d(TAG, "initData: [mAdapter] " + mAdapter.toString());
         cakeFragmentBinding.cakeListRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         cakeFragmentBinding.cakeListRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -54,4 +54,5 @@ public class CakeListFragment extends Fragment {
         Log.d(TAG, "initData: [mViewModel] " + mViewModel.toString());
         cakeFragmentBinding.setVm(mViewModel);
     }
+
 }

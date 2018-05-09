@@ -6,4 +6,6 @@
     <dimen name="card_radius">4dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="cake_name">40sp</dimen>
+    <dimen name="text_padding">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
 </resources>

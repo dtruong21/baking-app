@@ -1,5 +1,8 @@
 package udacity.cmtruong.com.caketime.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -9,13 +12,49 @@ import java.util.List;
  * @version 1.0
  * @since May, 8th
  */
-public class Cake {
+public class Cake implements Parcelable {
     private int id;
     private String name;
     private List<Ingredient> ingredients;
     private List<Step> steps;
     private int serving;
     private String image;
+
+    protected Cake(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        ingredients = in.createTypedArrayList(Ingredient.CREATOR);
+        steps = in.createTypedArrayList(Step.CREATOR);
+        serving = in.readInt();
+        image = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeTypedList(ingredients);
+        dest.writeTypedList(steps);
+        dest.writeInt(serving);
+        dest.writeString(image);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Cake> CREATOR = new Creator<Cake>() {
+        @Override
+        public Cake createFromParcel(Parcel in) {
+            return new Cake(in);
+        }
+
+        @Override
+        public Cake[] newArray(int size) {
+            return new Cake[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -76,4 +115,5 @@ public class Cake {
                 ", image='" + image + '\'' +
                 '}';
     }
+
 }
