@@ -18,9 +18,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipe_detail);
-        Intent intent = getIntent();
-        Cake cake = intent.getParcelableExtra(Config.RECEIPE_INTENT_KEY);
-        Log.d(TAG, "onCreate: started ... " + cake.toString());
+
     }
 
     @Override
@@ -36,5 +34,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public Cake getRecipe() {
+        Intent intent = getIntent();
+        Cake cake = intent.getParcelableExtra(Config.RECEIPE_INTENT_KEY);
+        Log.d(TAG, "onCreate: started ... " + cake.toString());
+        return cake;
     }
 }
