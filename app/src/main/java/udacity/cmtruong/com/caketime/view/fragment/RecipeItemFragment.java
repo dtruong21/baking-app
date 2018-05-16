@@ -3,6 +3,7 @@ package udacity.cmtruong.com.caketime.view.fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,7 +60,11 @@ public class RecipeItemFragment extends Fragment {
             @Override
             public void onStepClicked(View view, int position) {
                 Intent intent = new Intent(getActivity(), StepRecipeActivity.class);
-                intent.putExtra(getString(R.string.step_key), steps.get(position));
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(getString(R.string.step_key), steps.get(position));
+                bundle.putParcelableArrayList(getString(R.string.step_list), (ArrayList<? extends Parcelable>) steps);
+                bundle.putInt(getString(R.string.step_position), position);
+                intent.putExtras(bundle);
                 Log.d(TAG, "onStepClicked: " + steps.get(position).toString());
                 startActivityForResult(intent, 1);
             }

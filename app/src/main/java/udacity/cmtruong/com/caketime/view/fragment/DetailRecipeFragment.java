@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import udacity.cmtruong.com.caketime.R;
@@ -33,13 +35,15 @@ public class DetailRecipeFragment extends Fragment {
     @BindView(R.id.step_title)
     TextView step_title;
 
-    @BindView(R.id.previous_bt)
-    Button previous_bt;
-
-    @BindView(R.id.next_bt)
-    Button next_bt;
+    Step step;
+    ArrayList<Step> steps;
+    int stepPosition;
 
     public DetailRecipeFragment() {
+    }
+
+    public static DetailRecipeFragment getInstance(ArrayList<Step> steps, int stepPosition) {
+        return new DetailRecipeFragment();
     }
 
     @Nullable
@@ -47,11 +51,19 @@ public class DetailRecipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.step_detail_fragment, container, false);
         ButterKnife.bind(this, view);
+        initData();
+        return view;
+    }
+
+    private void initData() {
         StepRecipeActivity activity = (StepRecipeActivity) getActivity();
-        Step step = activity.getStepDetail();
+        step = activity.getStepDetail();
+        steps = activity.getStepList();
+        stepPosition = activity.getStepPosition();
         Log.d(TAG, "onCreateView: " + step.toString());
         step_title.setText(step.getShortDescription());
         step_description.setText(step.getDescription());
-        return view;
     }
+
+
 }
