@@ -22,12 +22,17 @@
         </activity>
         <activity
             android:name=".view.activity.RecipeDetailActivity"
+            android:launchMode="singleTask"
             android:parentActivityName=".view.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.MainActivity" />
         </activity>
-        <activity android:name=".view.activity.DetailRecipeActivity"></activity>
+        <activity android:name=".view.activity.StepRecipeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.RecipeDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

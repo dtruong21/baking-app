@@ -24,10 +24,36 @@
         app:cardCornerRadius="@dimen/card_radius"
         app:cardUseCompatPadding="true">
 
-        <TextView
-            android:id="@+id/step_description"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/step_title"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_margin2"
+                android:layout_marginEnd="@dimen/text_margin"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin2"
+                android:gravity="center"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/step_description"
+                style="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_margin2"
+                android:layout_marginEnd="@dimen/text_margin2"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin2"
+                tools:text="Description" />
+        </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
 
     <LinearLayout
@@ -42,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/recycler_padding"
-            tools:text="Previous" />
+            android:text="@string/previous" />
 
         <Space
             android:layout_width="0dp"
@@ -55,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/recycler_padding"
-            tools:text="Next" />
+            android:text="@string/next" />
 
     </LinearLayout>
 </LinearLayout>

@@ -2,4 +2,7 @@
     <string name="app_name">Cake Time</string>
     <string name="ingredient">Ingredient</string>
     <string name="step">Step</string>
+    <string name="step_key">STEP</string>
+    <string name="previous">PREVIOUS</string>
+    <string name="next">NEXT</string>
 </resources>

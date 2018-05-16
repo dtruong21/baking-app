@@ -1,6 +1,7 @@
 package udacity.cmtruong.com.caketime.view.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +18,11 @@ import butterknife.ButterKnife;
 import udacity.cmtruong.com.caketime.R;
 import udacity.cmtruong.com.caketime.adapter.IngredientAdapter;
 import udacity.cmtruong.com.caketime.adapter.RecipeStepAdapter;
+import udacity.cmtruong.com.caketime.adapter.event.OnStepHandledListener;
 import udacity.cmtruong.com.caketime.model.Cake;
 import udacity.cmtruong.com.caketime.model.Ingredient;
 import udacity.cmtruong.com.caketime.model.Step;
+import udacity.cmtruong.com.caketime.view.activity.StepRecipeActivity;
 import udacity.cmtruong.com.caketime.view.activity.RecipeDetailActivity;
 
 public class RecipeItemFragment extends Fragment {
@@ -46,11 +49,21 @@ public class RecipeItemFragment extends Fragment {
         IngredientAdapter ingredientAdapter = new IngredientAdapter(ingredients);
         ingredient_rv.setAdapter(ingredientAdapter);
 
-        List<Step> steps = cake.getSteps();
+        final List<Step> steps = cake.getSteps();
         step_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         step_rv.setHasFixedSize(false);
         RecipeStepAdapter stepAdapter = new RecipeStepAdapter(steps);
         step_rv.setAdapter(stepAdapter);
+        stepAdapter.setOnItemClickedListener(new OnStepHandledListener() {
+            @Override
+            public void onStepClicked(View view, int position) {
+                Intent intent = new Intent(getActivity(), StepRecipeActivity.class);
+                intent.putExtra(getString(R.string.step_key), steps.get(position));
+                Log.d(TAG, "onStepClicked: " + steps.get(position).toString());
+                startActivityForResult(intent, 1);
+            }
+        });
+
         return rootView;
     }
 }

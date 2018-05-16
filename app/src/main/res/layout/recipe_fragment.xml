@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/list_title"
+                android:padding="@dimen/text_margin3"
                 android:gravity="center"
                 android:text="@string/ingredient" />
 
@@ -65,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/list_title"
+                android:padding="@dimen/text_margin3"
                 android:gravity="center"
                 android:text="@string/step" />
 
