@@ -1,6 +1,7 @@
 package udacity.cmtruong.com.caketime.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,9 @@ import udacity.cmtruong.com.caketime.view.fragment.CakeListFragment;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String FRAGMENT_KEY = "my_fragment";
+
+    CakeListFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: [MainActivity created]");
 
-        getFragmentManager().beginTransaction().add(R.id.cake_fragment, CakeListFragment.getInstance()).commit();
+
         Log.d(TAG, "onCreate: [Fragment]");
     }
 
@@ -37,5 +41,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

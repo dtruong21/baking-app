@@ -61,7 +61,6 @@ public class RecipeItemFragment extends Fragment {
             public void onStepClicked(View view, int position) {
                 Intent intent = new Intent(getActivity(), StepRecipeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(getString(R.string.step_key), steps.get(position));
                 bundle.putParcelableArrayList(getString(R.string.step_list), (ArrayList<? extends Parcelable>) steps);
                 bundle.putInt(getString(R.string.step_position), position);
                 intent.putExtras(bundle);

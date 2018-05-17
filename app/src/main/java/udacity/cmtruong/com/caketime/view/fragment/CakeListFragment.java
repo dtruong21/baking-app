@@ -1,10 +1,12 @@
 package udacity.cmtruong.com.caketime.view.fragment;
 
 import android.app.Fragment;
+import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,15 +46,24 @@ public class CakeListFragment extends Fragment {
         return contentView;
     }
 
+
     private void initData() {
         mAdapter = new CakeRecipeAdapter();
         Log.d(TAG, "initData: [mAdapter] " + mAdapter.toString());
-        cakeFragmentBinding.cakeListRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        cakeFragmentBinding.cakeListRecycler.setItemAnimator(new DefaultItemAnimator());
+        boolean isTablet = getResources().getBoolean(R.bool.isTabletMode);
+        if (isTablet) {
+            cakeFragmentBinding.cakeListRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            cakeFragmentBinding.cakeListRecycler.setHasFixedSize(true);
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        } else {
+            cakeFragmentBinding.cakeListRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+            cakeFragmentBinding.cakeListRecycler.setItemAnimator(new DefaultItemAnimator());
+        }
         cakeFragmentBinding.cakeListRecycler.setAdapter(mAdapter);
         mViewModel = new CakeListViewModel(mAdapter);
         Log.d(TAG, "initData: [mViewModel] " + mViewModel.toString());
         cakeFragmentBinding.setVm(mViewModel);
+        //cakeFragmentBinding.executePendingBindings();
     }
 
 }

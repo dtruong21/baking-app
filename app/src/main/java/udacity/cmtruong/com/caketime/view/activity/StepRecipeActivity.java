@@ -33,28 +33,32 @@ public class StepRecipeActivity extends AppCompatActivity {
     @BindView(R.id.next_bt)
     Button next_bt;
     int stepPosition;
-
     Step step;
     ArrayList<Step> steps;
+    private static final String LIST_STEP = "mSteps";
+    private static final String POSITION_STEP = "mPosition";
+    FragmentManager fm = getFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_recipe);
+        setContentView(R.layout.activity_detail_step);
         ButterKnife.bind(this);
         b = getIntent().getExtras();
-        getStepDetail();
         getStepPosition();
         getStepList();
+        step = getStepList().get(getStepPosition());
         Log.d(TAG, "onCreate: " + getStepList().toString());
         if (savedInstanceState == null) {
-            FragmentManager fm = getFragmentManager();
             fm.beginTransaction()
                     .add(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
                     .addToBackStack(null)
                     .commit();
 
             handleVisibility();
+        } else {
+            steps = savedInstanceState.getParcelableArrayList(LIST_STEP);
+            stepPosition = savedInstanceState.getInt(POSITION_STEP);
         }
     }
 
@@ -81,12 +85,6 @@ public class StepRecipeActivity extends AppCompatActivity {
 
     }
 
-    public Step getStepDetail() {
-        step = b.getParcelable(getString(R.string.step_key));
-        Log.d(TAG, "onCreate: " + step.toString());
-        return step;
-    }
-
 
     public int getStepPosition() {
         stepPosition = b.getInt(getString(R.string.step_position));
@@ -111,4 +109,30 @@ public class StepRecipeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(LIST_STEP, getStepList());
+        outState.putInt(POSITION_STEP, getStepPosition());
+    }
+
+    public void goNextStep(View view) {
+        if (next_bt != null) {
+            stepPosition++;
+            Log.d(TAG, "goNextStep: " + stepPosition);
+            fm.beginTransaction()
+                    .replace(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
+                    .commit();
+        }
+    }
+
+    public void backPreviousStep(View view) {
+        if (previous_bt != null) {
+            stepPosition--;
+            Log.d(TAG, "backPreviousStep: " + stepPosition);
+            fm.beginTransaction()
+                    .replace(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
+                    .commit();
+        }
+    }
 }

@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/recycler_padding"
             android:text="@string/previous"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:onClick="backPreviousStep"/>
 
         <Space
             android:layout_width="0dp"
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/recycler_padding"
             android:text="@string/next"
+            android:onClick="goNextStep"
             android:visibility="invisible" />
 
     </LinearLayout>

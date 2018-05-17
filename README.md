@@ -1,5 +1,5 @@
 # Cake Time
 
-This is my third project in Udacity program with MVVM pattern, DataBinding, RxJava and Retrofit.
+This is my third project in Udacity program. 
 
 ### Enjoy and thanks

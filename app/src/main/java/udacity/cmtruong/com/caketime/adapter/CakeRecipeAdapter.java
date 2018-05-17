@@ -65,6 +65,7 @@ public class CakeRecipeAdapter extends RecyclerView.Adapter<CakeRecipeAdapter.Ca
         public CakeViewHolder(CakeItemBinding itemBinding) {
             super(itemBinding.cakeCardView);
             this.itemBinding = itemBinding;
+            itemBinding.executePendingBindings();
         }
 
 
