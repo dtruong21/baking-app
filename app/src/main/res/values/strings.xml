@@ -9,4 +9,6 @@
     <string name="previous">PREVIOUS</string>
     <string name="next">NEXT</string>
     <string name="error">Video is not available</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
