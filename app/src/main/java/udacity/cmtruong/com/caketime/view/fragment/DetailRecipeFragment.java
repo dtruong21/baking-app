@@ -74,6 +74,14 @@ public class DetailRecipeFragment extends Fragment {
         return mFragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        if (savedInstanceState != null && savedInstanceState.containsKey(PLAYER_POSITION))
+            currentPositionPlay = savedInstanceState.getLong(PLAYER_POSITION);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -81,11 +89,11 @@ public class DetailRecipeFragment extends Fragment {
         setRetainInstance(true);
         ButterKnife.bind(this, view);
         if (getArguments() != null) {
+            Log.d(TAG, "onCreateView: " + getArguments().toString());
             steps = getArguments().getParcelableArrayList(STEP_LIST);
             stepPosition = getArguments().getInt(STEP_POSITION);
         }
-        if (savedInstanceState != null && savedInstanceState.containsKey(PLAYER_POSITION))
-            currentPositionPlay = savedInstanceState.getLong(PLAYER_POSITION);
+
         initData();
         return view;
     }
@@ -95,6 +103,7 @@ public class DetailRecipeFragment extends Fragment {
         super.onStop();
         if (mPlayer != null) {
             currentPositionPlay = mPlayer.getCurrentPosition();
+            Log.d(TAG, "onStop: " + currentPositionPlay);
             isStopped = true;
             releasePlayer();
         }
@@ -107,9 +116,9 @@ public class DetailRecipeFragment extends Fragment {
     }
 
     private void initData() {
-        StepRecipeActivity activity = (StepRecipeActivity) getActivity();
-        steps = activity.getStepList();
-        stepPosition = activity.getStepPosition();
+        //StepRecipeActivity activity = (StepRecipeActivity) getActivity();
+        //steps = activity.getStepList();
+        //stepPosition = activity.getStepPosition();
         step = steps.get(stepPosition);
         Log.d(TAG, "onCreateView: " + step.toString());
         step_title.setText(step.getShortDescription());
@@ -143,7 +152,8 @@ public class DetailRecipeFragment extends Fragment {
             );
             mPlayer.prepare(mediaSource);
             mPlayer.setPlayWhenReady(true);
-            if (currentPositionPlay != 0 && isStopped)
+            Log.d(TAG, "initPlayer: " + currentPositionPlay);
+            if (currentPositionPlay != 0)
                 mPlayer.seekTo(currentPositionPlay);
             else
                 mPlayer.seekTo(0);
@@ -170,5 +180,6 @@ public class DetailRecipeFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(PLAYER_POSITION, currentPositionPlay);
+        Log.d(TAG, "onSaveInstanceState: " + currentPositionPlay);
     }
 }

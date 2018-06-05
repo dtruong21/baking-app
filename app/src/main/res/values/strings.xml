@@ -11,4 +11,9 @@
     <string name="error">Video is not available</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="noRecipeFavorite">Favorite recipe not available</string>
+    <string name="no_favorite_recipe">No favorite recipe</string>
+    <string name="farine_test">Farine</string>
+    <string name="widget_quantity">10g</string>
 </resources>

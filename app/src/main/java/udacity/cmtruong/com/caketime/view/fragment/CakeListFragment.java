@@ -50,15 +50,24 @@ public class CakeListFragment extends Fragment {
     private void initData() {
         mAdapter = new CakeRecipeAdapter();
         Log.d(TAG, "initData: [mAdapter] " + mAdapter.toString());
-        boolean isTablet = getResources().getBoolean(R.bool.isTabletMode);
-        if (isTablet) {
+        //boolean isTablet = getResources().getBoolean(R.bool.isTabletMode);
+        //if (!isTablet) {
+        //  cakeFragmentBinding.cakeListRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        //  cakeFragmentBinding.cakeListRecycler.setHasFixedSize(true);
+        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        //} else {
+
+        if (getResources().getBoolean(R.bool.isTabletMode)) {
+            Log.d(TAG, "initData: is tablet mode");
             cakeFragmentBinding.cakeListRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             cakeFragmentBinding.cakeListRecycler.setHasFixedSize(true);
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         } else {
+            Log.d(TAG, "initData: is phone mode");
             cakeFragmentBinding.cakeListRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             cakeFragmentBinding.cakeListRecycler.setItemAnimator(new DefaultItemAnimator());
         }
+        //}
         cakeFragmentBinding.cakeListRecycler.setAdapter(mAdapter);
         mViewModel = new CakeListViewModel(mAdapter);
         Log.d(TAG, "initData: [mViewModel] " + mViewModel.toString());

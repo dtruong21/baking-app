@@ -5,6 +5,12 @@ import net.simonvt.schematic.annotation.Table;
 
 @Database(version = CakeRecipeDatabase.VERSION)
 public final class CakeRecipeDatabase {
+
+
+    public static CakeRecipeDatabase getInstance() {
+        return new CakeRecipeDatabase();
+    }
+
     public static final int VERSION = 1;
 
     @Table(IngredientsColumns.class)
@@ -12,4 +18,6 @@ public final class CakeRecipeDatabase {
 
     @Table(CakeRecipeColumns.class)
     public static final String CAKE_RECIPES = "cake_recipe";
+
+
 }

@@ -12,6 +12,10 @@ public interface IngredientsColumns {
     @AutoIncrement
     String _ID = "_id";
 
+    @DataType(DataType.Type.TEXT)
+    @NotNull
+    String INGREDIENT = "ingredient";
+
     @DataType(DataType.Type.INTEGER)
     @References(table = CakeRecipeDatabase.CAKE_RECIPES, column = CakeRecipeColumns.CAKE_ID)
     String CAKE_RECIPE_ID = "cake_id";
@@ -24,7 +28,5 @@ public interface IngredientsColumns {
     @NotNull
     String QUANTITY = "quantity";
 
-    @DataType(DataType.Type.TEXT)
-    @NotNull
-    String INGREDIENT = "ingredient";
+
 }

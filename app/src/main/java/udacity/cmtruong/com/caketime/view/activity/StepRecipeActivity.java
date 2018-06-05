@@ -54,12 +54,11 @@ public class StepRecipeActivity extends AppCompatActivity {
                     .add(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
                     .addToBackStack(null)
                     .commit();
-
-            handleVisibility();
         } else {
             steps = savedInstanceState.getParcelableArrayList(LIST_STEP);
             stepPosition = savedInstanceState.getInt(POSITION_STEP);
         }
+        handleVisibility();
     }
 
     @Override
@@ -98,6 +97,7 @@ public class StepRecipeActivity extends AppCompatActivity {
 
     private void handleVisibility() {
         if (stepPosition == 0) {
+            Log.d(TAG, "handleVisibility: " + stepPosition);
             next_bt.setVisibility(View.VISIBLE);
             previous_bt.setVisibility(View.INVISIBLE);
         } else if (stepPosition == steps.size() - 1) {
@@ -112,27 +112,29 @@ public class StepRecipeActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(LIST_STEP, getStepList());
-        outState.putInt(POSITION_STEP, getStepPosition());
+        outState.putParcelableArrayList(LIST_STEP, steps);
+        outState.putInt(POSITION_STEP, stepPosition);
     }
 
     public void goNextStep(View view) {
         if (next_bt != null) {
-            stepPosition++;
+            ++stepPosition;
             Log.d(TAG, "goNextStep: " + stepPosition);
             fm.beginTransaction()
                     .replace(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
                     .commit();
+            handleVisibility();
         }
     }
 
     public void backPreviousStep(View view) {
         if (previous_bt != null) {
-            stepPosition--;
+            --stepPosition;
             Log.d(TAG, "backPreviousStep: " + stepPosition);
             fm.beginTransaction()
                     .replace(R.id.recipe_container, DetailRecipeFragment.getInstance(steps, stepPosition))
                     .commit();
+            handleVisibility();
         }
     }
 }
