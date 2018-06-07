@@ -11,7 +11,7 @@ public final class CakeRecipeDatabase {
         return new CakeRecipeDatabase();
     }
 
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
 
     @Table(IngredientsColumns.class)
     public static final String INGREDIENTS = "ingredients";

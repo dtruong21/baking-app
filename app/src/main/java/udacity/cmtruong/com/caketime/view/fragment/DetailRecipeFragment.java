@@ -93,7 +93,6 @@ public class DetailRecipeFragment extends Fragment {
             steps = getArguments().getParcelableArrayList(STEP_LIST);
             stepPosition = getArguments().getInt(STEP_POSITION);
         }
-
         initData();
         return view;
     }

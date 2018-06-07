@@ -36,6 +36,10 @@ public class RecipeItemFragment extends Fragment {
     @BindView(R.id.step_rv)
     RecyclerView step_rv;
 
+    public interface ItemCallBack {
+        void getStepSelected(ArrayList<Step> steps, int position);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -56,16 +60,11 @@ public class RecipeItemFragment extends Fragment {
         step_rv.setHasFixedSize(false);
         RecipeStepAdapter stepAdapter = new RecipeStepAdapter(steps);
         step_rv.setAdapter(stepAdapter);
+        final ArrayList<Step> stepsList = new ArrayList<>(steps);
         stepAdapter.setOnItemClickedListener(new OnStepHandledListener() {
             @Override
             public void onStepClicked(View view, int position) {
-                Intent intent = new Intent(getActivity(), StepRecipeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(getString(R.string.step_list), (ArrayList<? extends Parcelable>) steps);
-                bundle.putInt(getString(R.string.step_position), position);
-                intent.putExtras(bundle);
-                Log.d(TAG, "onStepClicked: " + steps.get(position).toString());
-                startActivityForResult(intent, 1);
+                ((RecipeDetailActivity) getActivity()).getStepSelected(stepsList, position);
             }
         });
 
