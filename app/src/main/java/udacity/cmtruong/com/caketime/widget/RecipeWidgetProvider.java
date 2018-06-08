@@ -94,11 +94,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     }
 
     public static void setRecipeText(Context context, String name) {
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider_item);
-
         views.setTextViewText(R.id.appwidget_text, name);
-
     }
 
 }

@@ -13,7 +13,6 @@ import udacity.cmtruong.com.caketime.config.Config;
  */
 public class PreferencesHelper {
 
-
     public static String getSaveRecipe(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(Config.RECIPE_NAME, "");

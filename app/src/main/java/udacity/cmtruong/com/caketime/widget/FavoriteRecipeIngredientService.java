@@ -66,10 +66,8 @@ public class FavoriteRecipeIngredientService extends RemoteViewsService {
 
             @Override
             public void onDestroy() {
-                if (mCursor != null) {
-                    mCursor.close();
-                    mCursor = null;
-                }
+                mCursor.close();
+                mCursor = null;
 
             }
 

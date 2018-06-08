@@ -159,7 +159,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
         SQLiteDatabase database = helper.getReadableDatabase();
         long row = DatabaseUtils.queryNumEntries(database, udacity.cmtruong.com.caketime.data.CakeRecipeDatabase.CAKE_RECIPES, CakeRecipeColumns.CAKE_ID + "= " + cakeID, null);
         database.close();
-        return row > 0;
+        if (row > 0) return true;
+        else return false;
     }
 
     @Override
