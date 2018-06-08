@@ -3,12 +3,14 @@ package udacity.cmtruong.com.caketime.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Binder;
 import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import udacity.cmtruong.com.caketime.R;
+import udacity.cmtruong.com.caketime.api.PreferencesHelper;
 import udacity.cmtruong.com.caketime.data.IngredientsColumns;
 import udacity.cmtruong.com.caketime.data.RecipeProvider;
 
@@ -19,8 +21,6 @@ import udacity.cmtruong.com.caketime.data.RecipeProvider;
  */
 public class FavoriteRecipeIngredientService extends RemoteViewsService {
     private static final String TAG = FavoriteRecipeIngredientService.class.getSimpleName();
-
-    private static final int INDEX_INGREDIENT_ID = 0;
 
     private static final String[] INGREDIENTS_COL = {
             IngredientsColumns._ID,
@@ -36,29 +36,32 @@ public class FavoriteRecipeIngredientService extends RemoteViewsService {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate: create the service");
+        RecipeWidgetProvider.setRecipeText(this, PreferencesHelper.getSaveRecipe(this));
+        Log.d(TAG, "onCreate: " + PreferencesHelper.getSaveRecipe(this));
     }
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new RemoteViewsFactory() {
-            Context context;
             Cursor mCursor = null;
 
             @Override
             public void onCreate() {
-
+                Log.d(TAG, "onCreate: the view factory");
             }
 
             @Override
             public void onDataSetChanged() {
                 if (mCursor != null)
                     mCursor.close();
+                final long token = Binder.clearCallingIdentity();
                 mCursor = getContentResolver().query(RecipeProvider.Ingredients.INGREDIENTS_URI,
                         INGREDIENTS_COL,
                         null,
                         null,
                         null);
-
+                Binder.restoreCallingIdentity(token);
             }
 
             @Override
@@ -72,25 +75,33 @@ public class FavoriteRecipeIngredientService extends RemoteViewsService {
 
             @Override
             public int getCount() {
-                if (mCursor == null) return 0;
+                if (mCursor == null)
+                    return 0;
                 return mCursor.getCount();
             }
 
             @Override
             public RemoteViews getViewAt(int position) {
+
                 RemoteViews view = new RemoteViews(getPackageName(), R.layout.recipe_widget_provider_item);
-                Log.d(TAG, "getViewAt: started");
+                Log.d(TAG, "getViewAt: " + position);
+                if (mCursor == null || !mCursor.moveToPosition(position)) return null;
+                Log.d(TAG, "getViewAt: checked");
                 String name = mCursor.getString(1);
                 String mesure = mCursor.getString(2);
                 double quantity = mCursor.getDouble(3);
-                String text = name + " " + mesure + " " + quantity;
+                String text = name + " " + quantity + " " + mesure;
+
+                Log.d(TAG, "getViewAt: " + mCursor.getColumnName(1));
+                Log.d(TAG, "getViewAt: " + mCursor.getString(1));
                 view.setTextViewText(R.id.widget_name, text);
-                Log.d(TAG, "getViewAt: " + text);
+                Log.d(TAG, "getViewAt: ");
                 return view;
             }
 
             @Override
             public RemoteViews getLoadingView() {
+                Log.d(TAG, "getLoadingView: checked");
                 RemoteViews rv = new RemoteViews(getPackageName(), R.layout.recipe_widget_provider_item);
                 return rv;
             }
@@ -102,8 +113,9 @@ public class FavoriteRecipeIngredientService extends RemoteViewsService {
 
             @Override
             public long getItemId(int position) {
+                Log.d(TAG, "getItemId: " + position);
                 if (mCursor.moveToPosition(position))
-                    return mCursor.getInt(INDEX_INGREDIENT_ID);
+                    return mCursor.getInt(0);
                 return position;
             }
 

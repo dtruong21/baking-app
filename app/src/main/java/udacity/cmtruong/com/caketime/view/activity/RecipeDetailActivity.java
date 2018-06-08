@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import udacity.cmtruong.com.caketime.R;
+import udacity.cmtruong.com.caketime.api.PreferencesHelper;
 import udacity.cmtruong.com.caketime.config.Config;
 import udacity.cmtruong.com.caketime.data.CakeRecipeColumns;
 import udacity.cmtruong.com.caketime.data.IngredientsColumns;
@@ -35,7 +37,7 @@ import udacity.cmtruong.com.caketime.view.fragment.RecipeItemFragment;
 
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeItemFragment.ItemCallBack {
     private static final String TAG = RecipeDetailActivity.class.getSimpleName();
-    private static final String ACTION_UPDATED = "udacity.cmtruong.com.caketime.view.activity.ACTION_UPDATE";
+    public static final String ACTION_UPDATED = "udacity.cmtruong.com.caketime.view.activity.ACTION_UPDATE";
     Cake cake;
     private boolean mTwoPane;
 
@@ -129,10 +131,11 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
                     getContentResolver().delete(RecipeProvider.CakeRecipes.RECIPES_URI, null, null);
                     getContentResolver().insert(RecipeProvider.CakeRecipes.RECIPES_URI, contentValues);
                     Log.d(TAG, "run: check " + contentValues.toString());
+                    PreferencesHelper.setSaveRecipe(getApplicationContext(), cake.getName());
                     try {
                         getContentResolver().applyBatch(RecipeProvider.AUTHORITY, operations);
                         Log.d(TAG, "run: operations " + operations.toString());
-                        sendBroadcast(dataIntent);
+                        getApplicationContext().sendBroadcast(dataIntent);
                     } catch (RemoteException | OperationApplicationException e) {
                         Log.e(TAG, "run: " + e, e);
                     }
@@ -145,7 +148,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
                 public void run() {
                     getContentResolver().delete(RecipeProvider.Ingredients.INGREDIENTS_URI, null, null);
                     getContentResolver().delete(RecipeProvider.CakeRecipes.RECIPES_URI, null, null);
-                    sendBroadcast(dataIntent);
+                    getApplicationContext().sendBroadcast(dataIntent);
                 }
             }).start();
         }
