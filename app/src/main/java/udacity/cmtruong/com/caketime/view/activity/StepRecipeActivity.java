@@ -34,6 +34,7 @@ public class StepRecipeActivity extends AppCompatActivity {
     Button next_bt;
     int stepPosition;
     Step step;
+    String recipeName;
     ArrayList<Step> steps;
     private static final String LIST_STEP = "mSteps";
     private static final String POSITION_STEP = "mPosition";
@@ -59,6 +60,7 @@ public class StepRecipeActivity extends AppCompatActivity {
             stepPosition = savedInstanceState.getInt(POSITION_STEP);
         }
         handleVisibility();
+        getSupportActionBar().setTitle(getCakeName());
     }
 
     @Override
@@ -88,6 +90,11 @@ public class StepRecipeActivity extends AppCompatActivity {
     public int getStepPosition() {
         stepPosition = b.getInt(getString(R.string.step_position));
         return stepPosition;
+    }
+
+
+    private String getCakeName() {
+        return b.getString(getString(R.string.recipe_key));
     }
 
     public ArrayList<Step> getStepList() {

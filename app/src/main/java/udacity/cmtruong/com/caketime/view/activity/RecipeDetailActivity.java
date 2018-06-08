@@ -10,9 +10,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -57,6 +55,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
         } else {
             mTwoPane = false;
         }
+        getSupportActionBar().setTitle(cake.getName());
     }
 
     @Override
@@ -173,6 +172,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
         } else {
             Intent intent = new Intent(this, StepRecipeActivity.class);
             Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.recipe_key), cake.getName());
             bundle.putParcelableArrayList(getString(R.string.step_list), steps);
             bundle.putInt(getString(R.string.step_position), position);
             intent.putExtras(bundle);

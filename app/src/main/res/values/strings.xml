@@ -3,6 +3,7 @@
     <string name="ingredient">Ingredient</string>
     <string name="step">Step</string>
     <string name="step_key">STEP</string>
+    <string name="recipe_key">RECIPES</string>
     <string name="step_list">STEPS</string>
     <string name="step_size">STEP_SIZE</string>
     <string name="step_position">STEP_POSITION</string>

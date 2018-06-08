@@ -90,7 +90,7 @@ public class FavoriteRecipeIngredientService extends RemoteViewsService {
                 String name = mCursor.getString(1);
                 String mesure = mCursor.getString(2);
                 double quantity = mCursor.getDouble(3);
-                String text = name + " " + quantity + " " + mesure;
+                String text = "😀 " + name + " " + quantity + " " + mesure;
 
                 Log.d(TAG, "getViewAt: " + mCursor.getColumnName(1));
                 Log.d(TAG, "getViewAt: " + mCursor.getString(1));

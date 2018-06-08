@@ -9,5 +9,8 @@
         android:id="@+id/widget_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/farine_test" />
+        android:textSize="@dimen/ingredient_name"
+        tools:text="@string/farine_test"
+        android:paddingStart="@dimen/text_margin3"
+        android:layout_margin="@dimen/text_margin3"/>
 </LinearLayout>

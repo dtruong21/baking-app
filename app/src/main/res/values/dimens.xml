@@ -11,6 +11,7 @@
     <dimen name="text_padding">8dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="step_name">20sp</dimen>
+    <dimen name="ingredient_name">16sp</dimen>
     <dimen name="step_card_padding">10dp</dimen>
     <dimen name="step_card_margin">10dp</dimen>
 
