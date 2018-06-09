@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="udacity.cmtruong.com.caketime.vm.CakeListViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cake_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundList"
+            android:padding="@dimen/recycler_padding"
+            android:visibility="@{vm.recyclerViewVisibility}">
+
+        </android.support.v7.widget.RecyclerView>
+        <ProgressBar
+            android:id="@+id/cake_list_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:visibility="@{vm.progressBarVisibility}" />
+
+    </FrameLayout>
+
+
+</layout>
