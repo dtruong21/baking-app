@@ -17,4 +17,5 @@
     <string name="no_favorite_recipe">No favorite recipe</string>
     <string name="farine_test">Farine</string>
     <string name="widget_quantity">10g</string>
+    <string name="recipe_image">recipe_image</string>
 </resources>

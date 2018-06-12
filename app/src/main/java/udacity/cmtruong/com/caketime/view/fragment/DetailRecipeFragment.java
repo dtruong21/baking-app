@@ -60,6 +60,7 @@ public class DetailRecipeFragment extends Fragment {
     private static final String PLAYER_POSITION = "player_position";
     private static final String STEP_POSITION = "step_position";
     private int stepPosition;
+    private boolean isStopped;
 
     public DetailRecipeFragment() {
     }
