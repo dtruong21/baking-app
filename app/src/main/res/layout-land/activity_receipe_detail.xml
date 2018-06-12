@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipe_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    tools:context=".view.activity.RecipeDetailActivity">
+
+    <fragment
+        android:id="@+id/recipe_fragment"
+        android:name="udacity.cmtruong.com.caketime.view.fragment.RecipeItemFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+    </fragment>
+
+    <FrameLayout
+        android:id="@+id/recipe_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+    </FrameLayout>
+</LinearLayout>
