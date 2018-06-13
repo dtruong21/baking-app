@@ -47,17 +47,6 @@ public class MainActivityTest {
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
         ViewInteraction textView = onView(
-                allOf(withText("Nutella Pie"),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar),
-                                        childAtPosition(
-                                                withId(R.id.action_bar_container),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        textView.check(matches(withText("Nutella Pie")));
-
-        ViewInteraction textView2 = onView(
                 allOf(withId(R.id.recipe_title), withText("Ingredient"),
                         childAtPosition(
                                 childAtPosition(
@@ -65,9 +54,9 @@ public class MainActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textView2.check(matches(withText("Ingredient")));
+        textView.check(matches(withText("Ingredient")));
 
-        ViewInteraction textView3 = onView(
+        ViewInteraction textView2 = onView(
                 allOf(withId(R.id.step_title), withText("Step"),
                         childAtPosition(
                                 childAtPosition(
@@ -75,17 +64,7 @@ public class MainActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textView3.check(matches(withText("Step")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.step_title), withText("Step"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.step_cv),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView4.check(matches(withText("Step")));
+        textView2.check(matches(withText("Step")));
 
         ViewInteraction recyclerView2 = onView(
                 allOf(withId(R.id.step_rv),
@@ -98,12 +77,13 @@ public class MainActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(4947);
+            Thread.sleep(4940);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction textView5 = onView(
+
+        ViewInteraction textView3 = onView(
                 allOf(withId(R.id.step_title), withText("Recipe Introduction"),
                         childAtPosition(
                                 childAtPosition(
@@ -111,7 +91,17 @@ public class MainActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textView5.check(matches(withText("Recipe Introduction")));
+        textView3.check(matches(withText("Recipe Introduction")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.step_description), withText("Recipe Introduction"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView4.check(matches(withText("Recipe Introduction")));
 
     }
 

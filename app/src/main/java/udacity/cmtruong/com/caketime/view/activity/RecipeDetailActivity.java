@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -46,15 +47,19 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeIte
         List<Step> steps = cake.getSteps();
         ArrayList<Step> stepsList = new ArrayList<>(steps);
         if (findViewById(R.id.recipe_container) != null) {
+
             mTwoPane = true;
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             Log.d(TAG, "onCreate: " + stepsList.toString());
+            Log.d(TAG, "onCreate: landscape");
             getFragmentManager().beginTransaction()
                     .replace(R.id.recipe_container, DetailRecipeFragment.getInstance(stepsList, 0))
                     .commit();
         } else {
+            Log.d(TAG, "onCreate: portrait");
             mTwoPane = false;
         }
+
+
         getSupportActionBar().setTitle(cake.getName());
     }
 

@@ -61,7 +61,6 @@ public class CakeListFragment extends Fragment {
             Log.d(TAG, "initData: is tablet mode");
             cakeFragmentBinding.cakeListRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             cakeFragmentBinding.cakeListRecycler.setHasFixedSize(true);
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         } else {
             Log.d(TAG, "initData: is phone mode");
             cakeFragmentBinding.cakeListRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
