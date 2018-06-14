@@ -59,8 +59,9 @@ public class DetailRecipeFragment extends Fragment {
     private long currentPositionPlay;
     private static final String PLAYER_POSITION = "player_position";
     private static final String STEP_POSITION = "step_position";
+    private static final String IS_PAUSED = "pause";
     private int stepPosition;
-    private boolean isStopped;
+    private boolean isPaused = false;
 
     public DetailRecipeFragment() {
     }
@@ -78,8 +79,11 @@ public class DetailRecipeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        if (savedInstanceState != null && savedInstanceState.containsKey(PLAYER_POSITION))
+        if (savedInstanceState != null) {
             currentPositionPlay = savedInstanceState.getLong(PLAYER_POSITION);
+            isPaused = savedInstanceState.getBoolean(IS_PAUSED);
+        }
+
     }
 
     @Nullable
@@ -103,7 +107,17 @@ public class DetailRecipeFragment extends Fragment {
         if (mPlayer != null) {
             currentPositionPlay = mPlayer.getCurrentPosition();
             Log.d(TAG, "onStop: " + currentPositionPlay);
-            isStopped = true;
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mPlayer != null) {
+            currentPositionPlay = mPlayer.getCurrentPosition();
+            Log.d(TAG, "onStop: " + currentPositionPlay);
+            isPaused = true;
             releasePlayer();
         }
     }
@@ -150,8 +164,9 @@ public class DetailRecipeFragment extends Fragment {
                     getActivity(), userAgent), new DefaultExtractorsFactory(), null, null
             );
             mPlayer.prepare(mediaSource);
-            mPlayer.setPlayWhenReady(true);
-            Log.d(TAG, "initPlayer: " + currentPositionPlay);
+            mPlayer.setPlayWhenReady(!isPaused);
+            //mPlayer.setPlayWhenReady(true);
+            Log.d(TAG, "initPlayer: ");
             if (currentPositionPlay != 0)
                 mPlayer.seekTo(currentPositionPlay);
             else
@@ -179,6 +194,7 @@ public class DetailRecipeFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(PLAYER_POSITION, currentPositionPlay);
+        outState.putBoolean(IS_PAUSED, isPaused);
         Log.d(TAG, "onSaveInstanceState: " + currentPositionPlay);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,12 +30,16 @@ import udacity.cmtruong.com.caketime.view.activity.RecipeDetailActivity;
 
 public class RecipeItemFragment extends Fragment {
     private static final String TAG = RecipeItemFragment.class.getSimpleName();
-
+    private static final String SCROLL_POSITION = "position";
     @BindView(R.id.ingredient_rv)
     RecyclerView ingredient_rv;
 
     @BindView(R.id.step_rv)
     RecyclerView step_rv;
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView nestedScrollView;
+
+    private int scrollPosition;
 
     public interface ItemCallBack {
         void getStepSelected(ArrayList<Step> steps, int position);
@@ -68,6 +73,29 @@ public class RecipeItemFragment extends Fragment {
             }
         });
 
+        if (savedInstanceState != null) {
+            scrollPosition = savedInstanceState.getInt(SCROLL_POSITION);
+
+            nestedScrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    nestedScrollView.scrollTo(0, scrollPosition);
+                }
+            });
+        }
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SCROLL_POSITION, nestedScrollView.getScrollY());
+        Log.d(TAG, "onSaveInstanceState: " + nestedScrollView.getScrollY());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scrollPosition = nestedScrollView.getScrollY();
     }
 }
