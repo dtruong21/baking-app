@@ -28,11 +28,10 @@ It's time to bake. This is my version of Udacity's Baking App project. I build t
 
 ## User Interface
 
-![User Interface](../master/ui/1.jpg) ![User Interface](../master/ui/2.jpg)
+<img src="../master/ui/1.jpg" width="250"> <img src="../master/ui/3.jpg" width="250"><img src="../master/ui/2.jpg" width="250"> 
 
-![User Interface](../master/ui/3.jpg) ![User Interface](../master/ui/4.jpg)
+<img src="../master/ui/4.jpg" width="250"><img src="../master/ui/5.jpg" width="250">
 
-![User Interface](../master/ui/5.jpg)
 
 ## License
 
