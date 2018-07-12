@@ -2,6 +2,8 @@
 
 ## Udacity Baking App
 
+[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?maxAge=2592000)]()
+
 It's time to bake. This is my version of Udacity's Baking App project. I build this as part of [Udacity Android Developer Nanodegree](https://eu.udacity.com/course/android-developer-nanodegree-by-google--nd801) program i've enrolled.
 
 ## What I've used
